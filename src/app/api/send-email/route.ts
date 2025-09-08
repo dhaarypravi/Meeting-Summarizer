@@ -40,9 +40,9 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ ok: true, messageId: info.messageId });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("/api/send-email error:", err);
-    const msg = err?.issues?.[0]?.message || err?.message || "Failed to send email";
+    const msg = err instanceof Error? err?.message : "Failed to send email" ;
     return NextResponse.json({ error: msg }, { status: 400 });
   }
 }

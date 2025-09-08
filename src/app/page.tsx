@@ -35,8 +35,8 @@ export default function Home() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to generate summary");
       setSummary(data.summary || "");
-    } catch (e: any) {
-      alert(e.message || "Failed to generate summary");
+    } catch (e: unknown) {
+      alert(e instanceof Error ? e.message : "Failed to generate summary");
     } finally {
       setIsLoading(false);
     }

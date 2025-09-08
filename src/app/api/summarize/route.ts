@@ -35,10 +35,10 @@ Transcript:
     const summary = result.response.text();
 
     return NextResponse.json({ summary });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("/api/summarize error:", err);
     const msg =
-      err?.issues?.[0]?.message || err?.message || "Failed to summarize";
+      err instanceof Error ? err.message : "Failed to summarize";
     return NextResponse.json({ error: msg }, { status: 400 });
   }
 }
