@@ -1,141 +1,169 @@
+# 📝 Meeting Summarizer
 
-
-````markdown
-# AI Meeting Notes Summarizer & Sharer
-
-An AI-powered web application to **summarize meeting transcripts** and **share structured summaries via email**.  
-Built with **Next.js 14 (App Router)**, **TypeScript**, **TailwindCSS**, and the **OpenAI API**.
+A web application that automatically summarizes meeting transcripts using **AI**.  
+Built with **Next.js**, **TypeScript**, and **Gemini API**, this app generates structured summaries, including key decisions, action items, and next steps.
 
 ---
 
-## 🚀 Features
-
-- Upload or paste meeting transcripts.
-- Add a **custom instruction/prompt** (e.g., “Summarize in bullet points for executives”).
-- Generate **AI-powered structured summaries**.
-- Edit the generated summary before finalizing.
-- Share the summary via **email** by entering recipient addresses.
-- Clean and simple UI built with TailwindCSS.
+## ✨ Features
+- 🎙️ **Transcript Input** – Paste or upload meeting transcripts.  
+- 🤖 **AI Summaries** – Generates concise summaries using Google Gemini AI.  
+- 📄 **Structured Output** – Summaries include:
+  - Executive Summary  
+  - Key Decisions  
+  - Action Items with owners & deadlines  
+  - Risks/Blockers  
+  - Next Steps  
+- 📧 **Email Summary** – Send generated summaries directly via email.  
+- 🖥️ **Responsive UI** – Works on both desktop and mobile devices.  
 
 ---
 
 ## 🛠️ Tech Stack
-
-- **Frontend**: Next.js 14 (App Router) + TypeScript
-- **Styling**: TailwindCSS
-- **Backend**: Next.js API routes
-- **AI**: OpenAI GPT model
-- **Email**: Nodemailer (using SMTP / Gmail / any provider)
+| Technology      | Purpose                  |
+|-----------------|--------------------------|
+| **Next.js**     | Frontend & API Routes   |
+| **TypeScript**  | Type safety             |
+| **Google Gemini API** | AI-based summarization |
+| **TailwindCSS** | Styling                 |
+| **SendGrid**    | Email service           |
+| **Vercel**      | Deployment              |
 
 ---
 
-## 📦 Installation
+## 🚀 Getting Started
 
-Clone the repository:
-
+### **1. Clone the repository**
 ```bash
-git clone https://github.com/yourusername/meeting-summarizer.git
-cd meeting-summarizer
-````
-
-Install dependencies:
-
-```bash
+git clone https://github.com/dhaaryparvi/Meeting-Summarizer.git
+cd Meeting-Summarizer
+2. Install dependencies
+bash
+Copy code
 npm install
-```
+3. Setup environment variables
+Create a .env.local file in the root directory and add the following:
 
----
-
-## 🔑 Environment Variables
-
-Create a `.env.local` file in the root of the project:
-
-```env
-OPENAI_API_KEY=your_openai_api_key_here
-EMAIL_HOST=smtp.yourprovider.com
-EMAIL_PORT=587
-EMAIL_USER=your_email@example.com
-EMAIL_PASS=your_email_password_or_app_password
-```
-
-> ⚠️ If you use Gmail, you’ll need to create an **App Password** instead of your normal password.
-
----
-
-## ▶️ Running the App
-
-Start the development server:
-
-```bash
+env
+Copy code
+GEMINI_API_KEY=your_gemini_api_key_here
+SENDGRID_API_KEY=your_sendgrid_api_key_here
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+4. Run the development server
+bash
+Copy code
 npm run dev
+Your app will be live at: http://localhost:3000
+```
+# 📂 Project Structure
+csharp
+Copy code
+```
+Meeting-Summarizer/
+│
+├── app/                    # Next.js App Router
+│   ├── api/                # API routes
+│   │   └── summarize/      # Meeting summarizer endpoint
+│   │       └── route.ts
+│   │
+│   └── page.tsx            # Home page UI
+│
+├── components/             # Reusable UI components
+│
+├── styles/                 # Global styles
+│
+├── public/                 # Static assets
+│
+├── .env.local              # Environment variables
+└── README.md
+
+```
+# 🧑‍💻 Usage
+Summarize a Meeting Transcript
+Paste the meeting transcript into the text box.
+
+(Optional) Add a custom prompt for better summary control.
+
+Click "Generate Summary".
+
+The AI will return a structured summary in Markdown format.
+
+Send Summary via Email
+After generating a summary, click "Send Email".
+
+Enter the recipient's email address.
+
+The summary will be sent using SendGrid.
+
+# 📊 Example Summary Output
+Executive Summary
+The team discussed progress on the Q3 marketing campaign and identified blockers related to budget approvals.
+
+Key Decisions
+Approved a 20% budget increase for digital ads.
+
+Move product launch date to October 15th, 2025.
+
+Action Items
+Owner	Task	Deadline
+Sarah	Draft new campaign plan	Sept 15
+John	Update budget spreadsheet	Sept 12
+
+Risks/Blockers
+Delay in finance approval for extra budget.
+
+Next Steps
+Conduct follow-up meeting next Monday.
+
+# 🌍 Deployment
+To deploy on Vercel:
+
+bash
+Copy code
+vercel
+Make sure your .env.local variables are also configured in Vercel project settings.
+
+# 🤝 Contributing
+Pull requests are welcome!
+
+Steps to contribute:
+```
+bash
+Copy code
+# 1. Fork the repo
+# 2. Create a feature branch
+git checkout -b feature-name
+
+# 3. Commit your changes
+git commit -m "Added new feature"
+
+# 4. Push to the branch
+git push origin feature-name
+
+# 5. Open a pull request
+🐞 Troubleshooting
+Email Issues:
+If emails go to spam or are blocked:
+
+Verify your domain with SendGrid.
+
+Add SPF, DKIM, and DMARC records to your domain settings.
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+# 📜 License
+This project is licensed under the MIT License.
+
+yaml
+Copy code
 
 ---
 
-## 🧪 Testing the App
-
-1. Go to the homepage.
-2. Paste a transcript (e.g., meeting notes).
-3. Enter a prompt (example: *“Summarize in bullet points for executives”*).
-4. Click **Generate Summary** → AI will create a structured summary.
-5. Edit the summary if needed.
-6. Enter one or more email addresses and click **Share via Email**.
-7. Check the recipient’s inbox to confirm delivery.
-
----
-
-## 📄 Example Transcript to Test
-
-Paste this in the transcript box:
-
-```
-Today’s meeting covered three main points. First, the product team will finish the UI redesign by next Friday. Second, the sales team reported a 12% increase in leads this quarter. Finally, action items include scheduling a client demo and preparing the Q3 budget report.
-```
-
-Prompt:
-
-```
-Summarize in bullet points highlighting only key action items.
-```
-
----
-
-## ✅ Expected Output Example
-
-* Product team to finish UI redesign by next Friday.
-* Schedule a client demo.
-* Prepare the Q3 budget report.
-
----
-
-## 📤 Deployment
-
-To deploy on **Vercel**:
-
-```bash
-npm run build
-```
-
-Push to GitHub, then connect your repo to [Vercel](https://vercel.com).
-Make sure to set your `.env` values in Vercel’s **Environment Variables** settings.
-
----
-
-## 📌 Future Improvements
-
-* Support for **file uploads** (PDF, DOCX, TXT).
-* Save summaries in a **user dashboard**.
-* Support for multiple languages.
-* Integration with Slack/Teams for direct sharing.
-
----
-
-## 👩‍💻 Author
-
-Built by **\[Khushi Pandey]**
-📧 Contact:pandeykhushhi@gmail.com
-
-```
-
+### **How to Add It**
+1. Create a `README.md` file in your project's root folder.
+2. Paste the above content into it.
+3. Save and commit it:
+   ```bash
+   git add README.md
+   git commit -m "Added README file"
+   git push origin main
