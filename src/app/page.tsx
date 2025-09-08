@@ -54,8 +54,8 @@ export default function Home() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to send email");
       alert("Email sent!");
-    } catch (e: any) {
-      alert(e.message || "Failed to send email");
+    } catch (e: unknown) {
+      alert(e instanceof Error ? e.message : "Failed to send email");
     } finally {
       setEmailSending(false);
     }
