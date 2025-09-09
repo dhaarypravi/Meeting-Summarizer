@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { BackgroundBeamsDemo } from "../components/Background/page";
 
 function parseRecipients(input: string): string[] {
   return input
@@ -62,110 +63,92 @@ export default function Home() {
   };
 
   return (
-    <main style={{ maxWidth: 960, margin: "2rem auto", padding: "1rem" }}>
-      <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 16  , background: "linear-gradient(to right, #0ea5e9, #ef4444)", // primary → danger
-        WebkitBackgroundClip: "text", // Required for Safari/Chrome
-        backgroundClip: "text",       // Standard property
-        color: "transparent",
-                 // Makes gradient visible inside text
-       }}>
-        AI Meeting Notes Summarizer & Sharer
-      </h1>
-
-      {/* 1) Transcript */}
-      <section style={{ marginBottom: 24, padding: 16, border: "1px solid #333", borderRadius: 12 }}>
-        <h2 style={{ fontSize: 18, marginBottom: 8 }}>1) Transcript</h2>
-        <input
-          type="file"
-          accept=".txt,.md"
-          onChange={(e) => handleFile(e.target.files?.[0] || undefined)}
-          style={{ marginBottom: 8  , background: "linear-gradient(to right, #0ea5e9, #ef4444)", // primary → danger
-        WebkitBackgroundClip: "text", // Required for Safari/Chrome
-        backgroundClip: "text",       // Standard property
-        color: "transparent", cursor: "pointer" }}
-        />
-        <textarea
-          placeholder="Or paste transcript here…"
-          value={transcript}
-          onChange={(e) => setTranscript(e.target.value)}
-          rows={10}
-          style={{ width: "100%", padding: 12, borderRadius: 8, border: "1px solid #444" }}
-        />
-      </section>
-
-      {/* 2) Custom Instruction */}
-      <section style={{ marginBottom: 24, padding: 16, border: "1px solid #333", borderRadius: 12 }}>
-        <h2 style={{ fontSize: 18, marginBottom: 8 }}>2) Custom Instruction</h2>
-        <input
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          placeholder='e.g., "Highlight only action items"'
-          style={{ width: "100%", padding: 12, borderRadius: 8, border: "1px solid #444" }}
-        />
-        <button
-          onClick={generate}
-          disabled={isLoading || !transcript.trim()}
-         style={{
-  marginTop: 12,
-  padding: "10px 16px",
-  borderRadius: 10,
-  border: "1px solid #444",
-  cursor: "pointer",
-  display: "block",
-  textAlign: "center",
-  textDecoration: "none",
-  fontWeight: 600,
-  fontSize: "1em",
-  textTransform: "uppercase",
-  color: "#fff",
-  margin: "10px",
-  backgroundSize: "300% 300%",
-  background: "linear-gradient(to right, #0ea5e9, #ef4444)",
-  transition: "background-position 0.5s ease", // Smooth animation
-
-}}
-
-
+    <BackgroundBeamsDemo>
+      <main className="max-w-3xl mx-auto p-6 text-white">
+        <h1
+          className="text-3xl font-bold mb-6 text-center"
+          style={{
+            background: "linear-gradient(to right, #0ea5e9, #ef4444)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}
         >
-          {isLoading ? "Generating…" : "Generate Summary"}
-        </button>
-      </section>
+          AI Meeting Notes Summarizer & Sharer
+        </h1>
 
-      {/* 3) Editable Summary */}
-      <section style={{ marginBottom: 24, padding: 16, border: "1px solid #333", borderRadius: 12 }}>
-        <h2 style={{ fontSize: 18, marginBottom: 8 }}>3) Editable Summary</h2>
-        <textarea
-          value={summary}
-          onChange={(e) => setSummary(e.target.value)}
-          rows={14}
-          placeholder="Summary will appear here…"
-          style={{ width: "100%", padding: 12, borderRadius: 8, border: "1px solid #444" }}
-        />
-      </section>
+        {/* 1) Transcript */}
+        <section className="mb-6 p-4 border border-gray-700 rounded-lg bg-black/50">
+          <h2 className="text-lg mb-2">1) Transcript</h2>
+          <input
+            type="file"
+            accept=".txt,.md"
+            onChange={(e) => handleFile(e.target.files?.[0] || undefined)}
+            className="mb-2 cursor-pointer text-sm"
+          />
+          <textarea
+            placeholder="Or paste transcript here…"
+            value={transcript}
+            onChange={(e) => setTranscript(e.target.value)}
+            rows={10}
+            className="w-full p-3 rounded-md border border-gray-600 bg-black/30 text-white"
+          />
+        </section>
 
-      {/* 4) Share via Email */}
-      <section style={{ marginBottom: 24, padding: 16, border: "1px solid #333", borderRadius: 12 }}>
-        <h2 style={{ fontSize: 18, marginBottom: 8 }}>4) Share via Email</h2>
-        <input
-          value={recipients}
-          onChange={(e) => setRecipients(e.target.value)}
-          placeholder="Recipients (comma-separated)"
-          style={{ width: "100%", padding: 12, borderRadius: 8, border: "1px solid #444", marginBottom: 8 }}
-        />
-        <input
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-          placeholder="Subject"
-          style={{ width: "100%", padding: 12, borderRadius: 8, border: "1px solid #444", marginBottom: 8 }}
-        />
-        <button
-          onClick={sendEmail}
-          disabled={emailSending || !summary.trim() || !recipients.trim()}
-          style={{ padding: "10px 16px", borderRadius: 10, border: "1px solid #444", cursor: "pointer", background: "linear-gradient(to right, #0ea5e9, #ef4444)", color: "#fff", fontWeight: 600, fontSize: "1em", textTransform: "uppercase", backgroundSize: "300% 300%", transition: "background-position 0.5s ease", margin: "10px" }}
-        >
-          {emailSending ? "Sending…" : "Send Email"}
-        </button>
-      </section>
-    </main>
+        {/* 2) Custom Instruction */}
+        <section className="mb-6 p-4 border border-gray-700 rounded-lg bg-black/50">
+          <h2 className="text-lg mb-2">2) Custom Instruction</h2>
+          <input
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder='e.g., "Highlight only action items"'
+            className="w-full p-3 rounded-md border border-gray-600 mb-3 bg-black/30 text-white"
+          />
+          <button
+            onClick={generate}
+            disabled={isLoading || !transcript.trim()}
+            className="px-4 py-2 rounded-md font-semibold text-white bg-gradient-to-r from-sky-500 to-red-500 hover:opacity-90 transition"
+          >
+            {isLoading ? "Generating…" : "Generate Summary"}
+          </button>
+        </section>
+
+        {/* 3) Editable Summary */}
+        <section className="mb-6 p-4 border border-gray-700 rounded-lg bg-black/50">
+          <h2 className="text-lg mb-2">3) Editable Summary</h2>
+          <textarea
+            value={summary}
+            onChange={(e) => setSummary(e.target.value)}
+            rows={14}
+            placeholder="Summary will appear here…"
+            className="w-full p-3 rounded-md border border-gray-600 bg-black/30 text-white"
+          />
+        </section>
+
+        {/* 4) Share via Email */}
+        <section className="mb-6 p-4 border border-gray-700 rounded-lg bg-black/50">
+          <h2 className="text-lg mb-2">4) Share via Email</h2>
+          <input
+            value={recipients}
+            onChange={(e) => setRecipients(e.target.value)}
+            placeholder="Recipients (comma-separated)"
+            className="w-full p-3 rounded-md border border-gray-600 mb-2 bg-black/30 text-white"
+          />
+          <input
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            placeholder="Subject"
+            className="w-full p-3 rounded-md border border-gray-600 mb-3 bg-black/30 text-white"
+          />
+          <button
+            onClick={sendEmail}
+            disabled={emailSending || !summary.trim() || !recipients.trim()}
+            className="px-4 py-2 rounded-md font-semibold text-white bg-gradient-to-r from-sky-500 to-red-500 hover:opacity-90 transition"
+          >
+            {emailSending ? "Sending…" : "Send Email"}
+          </button>
+        </section>
+      </main>
+    </BackgroundBeamsDemo>
   );
 }
