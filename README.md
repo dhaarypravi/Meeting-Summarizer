@@ -3,6 +3,8 @@
 A web application that automatically summarizes meeting transcripts using **AI**.  
 Built with **Next.js**, **TypeScript**, and **Gemini API**, this app generates structured summaries, including key decisions, action items, and next steps.
 
+# Demo link : https://fabulous-raindrop-6f6f73.netlify.app/
+
 ---
 
 ## ✨ Features
